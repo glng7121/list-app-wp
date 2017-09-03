@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="ListApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ListApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <RelativePanel HorizontalAlignment="Center" Height="640" VerticalAlignment="Top" Width="360" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <!---<Button Name="AddingBtn" Content="Adding" HorizontalAlignment="Center" VerticalAlignment="Top"/> -->
+        <ListView Name="MainList" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Width="300" Margin="30,100,30,30">
+            <ListViewItem>
+                <CheckBox Content="Hello"></CheckBox>
+            </ListViewItem>
+            <ListViewItem HorizontalAlignment="Stretch">
+                <CheckBox HorizontalAlignment="Stretch">
+                    <TextBox Name="NewItemTB" KeyUp="NewItemTB_KeyUp" LostFocus="NewItemTB_LostFocus" GotFocus="NewItemTB_GotFocus"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" PlaceholderText="Enter new item here" />
+                </CheckBox>
+            </ListViewItem>
+        </ListView>
+    
+
+    </RelativePanel>
+</Page>
