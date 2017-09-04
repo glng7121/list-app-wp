@@ -8,18 +8,39 @@
     mc:Ignorable="d">
 
     <RelativePanel HorizontalAlignment="Center" Height="640" VerticalAlignment="Top" Width="360" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <!---<Button Name="AddingBtn" Content="Adding" HorizontalAlignment="Center" VerticalAlignment="Top"/> -->
-        <ListView Name="MainList" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Width="300" Margin="30,100,30,30">
+        
+        <CommandBar Name="Buttons" DefaultLabelPosition="Right" HorizontalAlignment="Stretch" Width="360" RelativePanel.AlignHorizontalCenterWithPanel="True">
+            <AppBarButton Label="Adding" Click="AddingBtn_Click" />
+            <AppBarButton Label="Deleting" Click="DeletingBtn_Click"/>
+
+            <!--<CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Like" Label="Like" Click="AppBarButton_Click"/>
+                <AppBarButton Icon="Dislike" Label="Dislike" Click="AppBarButton_Click"/>
+            </CommandBar.SecondaryCommands> -->
+
+            <CommandBar.Content>
+                <TextBlock Text="Mode options:" Margin="12,14"/>
+            </CommandBar.Content>
+            
+
+        </CommandBar>
+
+        <TextBlock Name="CurrModeBlk" Text="Adding" Margin="10,10,10,10" HorizontalAlignment="Stretch" RelativePanel.Below="Buttons" RelativePanel.AlignHorizontalCenterWithPanel="True" />
+        
+        <CheckBox Name="CategoryOption" Content="Add a category" RelativePanel.Below="CurrModeBlk" HorizontalAlignment="Center" RelativePanel.AlignHorizontalCenterWithPanel="True" FontSize="12" Checked="CategoryOption_Checked" Unchecked="CategoryOption_Unchecked"></CheckBox>
+
+        <ListView Name="MainList" SelectionChanged="List_OnSelectionChanged" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Width="300" Margin="10,10,10,10" RelativePanel.Below="CategoryOption" >
+            <CheckBox Content="filler"/>
             <ListViewItem>
-                <CheckBox Content="Hello"></CheckBox>
-            </ListViewItem>
-            <ListViewItem HorizontalAlignment="Stretch">
-                <CheckBox HorizontalAlignment="Stretch">
-                    <TextBox Name="NewItemTB" KeyUp="NewItemTB_KeyUp" LostFocus="NewItemTB_LostFocus" GotFocus="NewItemTB_GotFocus"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" PlaceholderText="Enter new item here" />
-                </CheckBox>
-            </ListViewItem>
+                <ListView Margin="50,0,0,0">
+                    <ListViewItem Content="blah" ></ListViewItem></ListView></ListViewItem>
+                    <StackPanel Name="NewItemField" Orientation="Horizontal" MaxWidth="280" UseLayoutRounding="True">
+                        <CheckBox Name="NewItemCB" MinWidth="30" MaxWidth="30"/>
+                        <TextBox Name="NewItemTB" MaxWidth="200" KeyUp="NewItemTB_KeyUp" LostFocus="NewItemTB_LostFocus" GotFocus="NewItemTB_GotFocus" TextWrapping="Wrap" PlaceholderText="Enter new item here"/>
+                    </StackPanel>
         </ListView>
-    
+
+
 
     </RelativePanel>
 </Page>
