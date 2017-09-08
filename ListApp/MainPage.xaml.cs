@@ -22,6 +22,7 @@ namespace ListApp
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     /// 
+
     public sealed partial class MainPage : Page
     {
         const string NEW_ITEM_PLACEHOLDER_TEXT = "Enter new item here.";
@@ -57,8 +58,15 @@ namespace ListApp
                     //adding new category, i.e. a new listview
                     ListView NewCat = new ListView();
                     NewCat.SelectionChanged += List_OnSelectionChanged;
+                    NewCat.Margin = new Windows.UI.Xaml.Thickness(30, 0, 0, 0);
+                    NewCat.MinWidth = 1000;
+
                     TextBlock NewCatName = new TextBlock();
+                    NewCatName.Tapped += CatToLV_Tapped;
                     NewCatName.Text = NewItemTB.Text;
+                    NewCatName.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    NewCatName.MinWidth = 350;
+                   
                     NewCat.Items.Insert(0, NewCatName);
                     SelectedList.Items.Insert(SelectedList.Items.Count - 1, NewCat);
                 }
@@ -67,9 +75,10 @@ namespace ListApp
                     //adding new item with a checkbox
                     CheckBox NewItem = new CheckBox();
                     NewItem.Content = NewItemTB.Text;
+                    NewItem.Margin = new Windows.UI.Xaml.Thickness(30, 0, 0, 0);
                     SelectedList.Items.Insert(SelectedList.Items.Count - 1, NewItem);
                 }
-                
+
                 //restore textbox placeholder text
                 NewItemTB.Text = "";
                 NewItemTB.PlaceholderText = NEW_ITEM_PLACEHOLDER_TEXT;
@@ -96,30 +105,48 @@ namespace ListApp
             CurrModeBlk.Text = CurrMode;
         }
 
+        private void CatToLV_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            //tapping category will look like tapping listview
+
+            //get listview containing the tapped category
+            TextBlock Cat = (TextBlock)sender;
+            Windows.UI.Xaml.DependencyObject CatList = Cat;
+            do
+            {
+                CatList = VisualTreeHelper.GetParent(CatList);
+            }
+            while (!(CatList is ListView));
+
+            //move new item input field to "tapped" listview
+            MoveNewItemField((ListView)CatList);
+        }
+
         private void List_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //user selected an item, presumably to add new items under.
 
             var SelectedItem = e.AddedItems?.FirstOrDefault();
 
-            //wipe out other selections
+            //CurrModeBlk.Text = SelectedItem.ToString()+"; "+(SelectedItem is ListView).ToString();
 
-
-            CurrModeBlk.Text = SelectedItem.ToString()+"; "+(SelectedItem is ListView).ToString();
             if (SelectedItem is ListView)
             {
                 //item is a category (characterized by being a list view) & is valid to add items under.
+                
                 //insert new item field at end of selected list
-                ListViewItem blah = new ListViewItem();
-                //blah.IsSelected;
-                ListView blah2 = new ListView();
-                blah2.SelectionMode = ListViewSelectionMode.Single;
-                StackPanel temp = NewItemField;
-                SelectedList.Items.RemoveAt(SelectedList.Items.Count-1);
-                SelectedList = (ListView)SelectedItem;
-                SelectedList.Items.Insert(SelectedList.Items.Count, temp);
-                string tempName = temp.Name;
+                MoveNewItemField((ListView)SelectedItem);
+
             }
+        }
+
+        private void MoveNewItemField(ListView destList)
+        {
+            StackPanel temp = NewItemField;
+            SelectedList.Items.RemoveAt(SelectedList.Items.Count - 1);
+            SelectedList = destList;
+            SelectedList.Items.Insert(SelectedList.Items.Count, temp);
+            string tempName = temp.Name;
         }
 
         private void CategoryOption_Checked(object sender, RoutedEventArgs e)
@@ -138,5 +165,7 @@ namespace ListApp
             //show checkbox for new item field
             NewItemCB.Visibility = Visibility.Visible;
         }
+
+
     }
 }

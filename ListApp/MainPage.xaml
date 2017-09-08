@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <RelativePanel HorizontalAlignment="Center" Height="640" VerticalAlignment="Top" Width="360" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <RelativePanel HorizontalAlignment="Center" Height="1000" VerticalAlignment="Top" Width="360" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         
         <CommandBar Name="Buttons" DefaultLabelPosition="Right" HorizontalAlignment="Stretch" Width="360" RelativePanel.AlignHorizontalCenterWithPanel="True">
             <AppBarButton Label="Adding" Click="AddingBtn_Click" />
@@ -29,16 +29,14 @@
         
         <CheckBox Name="CategoryOption" Content="Add a category" RelativePanel.Below="CurrModeBlk" HorizontalAlignment="Center" RelativePanel.AlignHorizontalCenterWithPanel="True" FontSize="12" Checked="CategoryOption_Checked" Unchecked="CategoryOption_Unchecked"></CheckBox>
 
-        <ListView Name="MainList" SelectionChanged="List_OnSelectionChanged" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Width="300" Margin="10,10,10,10" RelativePanel.Below="CategoryOption" >
-            <CheckBox Content="filler"/>
-            <ListViewItem>
-                <ListView Margin="50,0,0,0">
-                    <ListViewItem Content="blah" ></ListViewItem></ListView></ListViewItem>
-                    <StackPanel Name="NewItemField" Orientation="Horizontal" MaxWidth="280" UseLayoutRounding="True">
-                        <CheckBox Name="NewItemCB" MinWidth="30" MaxWidth="30"/>
-                        <TextBox Name="NewItemTB" MaxWidth="200" KeyUp="NewItemTB_KeyUp" LostFocus="NewItemTB_LostFocus" GotFocus="NewItemTB_GotFocus" TextWrapping="Wrap" PlaceholderText="Enter new item here"/>
-                    </StackPanel>
-        </ListView>
+            <ListView Name="MainList" RelativePanel.Below="CategoryOption" Margin="0,0,0,0" SelectionChanged="List_OnSelectionChanged" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Width="1000" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" >
+                <TextBlock Name="MainListCat" Text="List1" HorizontalAlignment="Stretch" Tapped="CatToLV_Tapped" MinWidth="350"/>
+                <StackPanel Name="NewItemField" Margin="30,0,0,0" Orientation="Horizontal" MaxWidth="280" UseLayoutRounding="True">
+                    <CheckBox Name="NewItemCB" MinWidth="30" MaxWidth="30" IsEnabled="False" />
+                    <TextBox Name="NewItemTB" MaxWidth="200" KeyUp="NewItemTB_KeyUp" LostFocus="NewItemTB_LostFocus" GotFocus="NewItemTB_GotFocus" TextWrapping="Wrap" PlaceholderText="Enter new item here"/>
+                </StackPanel>
+            </ListView>
+
 
 
 
