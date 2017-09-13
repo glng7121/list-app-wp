@@ -7,9 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <RelativePanel HorizontalAlignment="Center" Height="1000" VerticalAlignment="Top" Width="360" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
-        <CommandBar Name="Buttons" DefaultLabelPosition="Right" HorizontalAlignment="Stretch" Width="360" RelativePanel.AlignHorizontalCenterWithPanel="True">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <CommandBar Name="Buttons" DefaultLabelPosition="Right" Grid.Row="0" Grid.Column="0" Height="48" Margin="0,0,12,0">
             <AppBarButton Label="Adding" Click="AddingBtn_Click" />
             <AppBarButton Label="Deleting" Click="DeletingBtn_Click"/>
 
@@ -21,24 +31,24 @@
             <CommandBar.Content>
                 <TextBlock Text="Mode options:" Margin="12,14"/>
             </CommandBar.Content>
-            
+
 
         </CommandBar>
 
-        <TextBlock Name="CurrModeBlk" Text="Adding" Margin="10,10,10,10" HorizontalAlignment="Stretch" RelativePanel.Below="Buttons" RelativePanel.AlignHorizontalCenterWithPanel="True" />
-        
-        <CheckBox Name="CategoryOption" Content="Add a category" RelativePanel.Below="CurrModeBlk" HorizontalAlignment="Center" RelativePanel.AlignHorizontalCenterWithPanel="True" FontSize="12" Checked="CategoryOption_Checked" Unchecked="CategoryOption_Unchecked"></CheckBox>
+        <TextBlock Name="CurrModeBlk" Text="In ADDING mode." Margin="10,10,10,10" HorizontalAlignment="Center" Grid.Row="1"/>
 
-            <ListView Name="MainList" RelativePanel.Below="CategoryOption" Margin="0,0,0,0" SelectionChanged="List_OnSelectionChanged" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Width="1000" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" >
-                <TextBlock Name="MainListCat" Text="List1" HorizontalAlignment="Stretch" Tapped="CatToLV_Tapped" MinWidth="350"/>
-                <StackPanel Name="NewItemField" Margin="30,0,0,0" Orientation="Horizontal" MaxWidth="280" UseLayoutRounding="True">
-                    <CheckBox Name="NewItemCB" MinWidth="30" MaxWidth="30" IsEnabled="False" />
-                    <TextBox Name="NewItemTB" MaxWidth="200" KeyUp="NewItemTB_KeyUp" LostFocus="NewItemTB_LostFocus" GotFocus="NewItemTB_GotFocus" TextWrapping="Wrap" PlaceholderText="Enter new item here"/>
-                </StackPanel>
-            </ListView>
+        <CheckBox Name="CategoryOption" HorizontalAlignment="Center" Content="Add a category" Grid.Row="2" FontSize="12" Checked="CategoryOption_Checked" Unchecked="CategoryOption_Unchecked" Height="32" Width="120"></CheckBox>
 
-
+        <ListView Name="MainList" Margin="0,0,0,0" SelectionChanged="List_OnSelectionChanged" Grid.Row="3" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" >
+            <TextBlock Name="MainListCat" Text="List1" HorizontalAlignment="Stretch" Tapped="CatToLV_Tapped" MinWidth="350"/>
+            <StackPanel Name="NewItemField" Margin="30,0,0,0" Orientation="Horizontal" MaxWidth="280" >
+                <CheckBox Name="NewItemCB" MinWidth="30" MaxWidth="30" IsEnabled="False" />
+                <TextBox Name="NewItemTB" MaxWidth="200" KeyUp="NewItemTB_KeyUp" LostFocus="NewItemTB_LostFocus" GotFocus="NewItemTB_GotFocus" TextWrapping="Wrap" PlaceholderText="Enter new item here"/>
+            </StackPanel>
+        </ListView>
 
 
-    </RelativePanel>
+
+
+    </Grid>
 </Page>

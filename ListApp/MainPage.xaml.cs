@@ -59,13 +59,13 @@ namespace ListApp
                     ListView NewCat = new ListView();
                     NewCat.SelectionChanged += List_OnSelectionChanged;
                     NewCat.Margin = new Windows.UI.Xaml.Thickness(30, 0, 0, 0);
-                    NewCat.MinWidth = 1000;
+                    //NewCat.MinWidth = 1000;
+                    
 
                     TextBlock NewCatName = new TextBlock();
                     NewCatName.Tapped += CatToLV_Tapped;
                     NewCatName.Text = NewItemTB.Text;
-                    NewCatName.HorizontalAlignment = HorizontalAlignment.Stretch;
-                    NewCatName.MinWidth = 350;
+                    //NewCatName.MinWidth = 350;
                    
                     NewCat.Items.Insert(0, NewCatName);
                     SelectedList.Items.Insert(SelectedList.Items.Count - 1, NewCat);
