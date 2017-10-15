@@ -154,12 +154,22 @@ namespace ListApp
         {
             CurrMode = ADDING_MODE;
             CurrModeBlk.Text = CurrMode;
+
+            //show elements related to addition
+            CategoryOption.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            NewItemField.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            GetParentLVIOf(NewItemField).Visibility = Windows.UI.Xaml.Visibility.Visible;
         }
 
         private void DeletingBtn_Click(object sender, RoutedEventArgs e)
         {
             CurrMode = DELETING_MODE;
             CurrModeBlk.Text = CurrMode;
+
+            //hide elements not related to deletion
+            CategoryOption.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            NewItemField.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            GetParentLVIOf(NewItemField).Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
         private ListView GetParentListOf(DependencyObject child)
@@ -175,6 +185,21 @@ namespace ListApp
             while (!(ParentLV is ListView));
 
             return (ListView)ParentLV;
+        }
+
+        private ListViewItem GetParentLVIOf(DependencyObject child)
+        {
+            if (child == MainList)
+                return null;
+
+            DependencyObject ParentLVI = child;
+            do
+            {
+                ParentLVI = VisualTreeHelper.GetParent(ParentLVI);
+            }
+            while (!(ParentLVI is ListViewItem));
+
+            return (ListViewItem)ParentLVI;
         }
 
         private void RemoveItem(DependencyObject item)
