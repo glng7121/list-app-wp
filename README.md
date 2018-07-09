@@ -1,3 +1,3 @@
-This is the repository for my side project, a shopping list app for Windows Phones. It currently features N-nested categories, item addition/deletion, and an intuitive UI. I aim to finish this project in December 2017.
+Discontinued shopping list app for Windows Phones. It currently features N-nested categories, item addition/deletion, and an intuitive UI, *but* its implementation is horrible because I wrote it before realizing that data binding existed. Also, I finally (and inevitably) switched to Android, haha...
 
-Still in heavy development, with lots of work to do!
+Will write an Android version and post the link here when I get the chance!
